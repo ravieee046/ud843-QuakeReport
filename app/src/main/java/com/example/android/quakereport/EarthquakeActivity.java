@@ -38,7 +38,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         earthquakes.add(new Earthquake("4.6","Tokyo","Feb 16, 1995"));
         earthquakes.add(new Earthquake("3.8","Mexico City","Oct 17, 2017"));
         earthquakes.add(new Earthquake("5.6","Moscow","Jan 26, 2017"));
-        earthquakes.add(new Earthquake("4.7","Rio de Janeiro","Sep 17,2017"));
+        earthquakes.add(new Earthquake("4.7","Rio de Janeiro","Sep 17, 2017"));
         earthquakes.add(new Earthquake("6.8","Paris","Oct 17, 2017"));
 
         // Find a reference to the {@link ListView} in the layout

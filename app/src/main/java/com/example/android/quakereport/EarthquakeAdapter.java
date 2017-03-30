@@ -26,25 +26,25 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         View listItemView = convertView;
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item, parent, false);
+                    R.layout.earthquake_list_item, parent, false);
         }
 
         // Get the {@link Earthquake} object located at this position in the list
         Earthquake earthquake = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID magnitude
+        // Find the TextView in the earthquake_list_item.xmlst_item.xml layout with the ID magnitude
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         // Get the magnitude from the current Earthquake object and
         // set this text on the magnitude TextView
         magnitudeTextView.setText(earthquake.getMagnitude());
 
-        // Find the TextView in the list_item.xml layout with the ID place
-        TextView placeTextView = (TextView) listItemView.findViewById(R.id.place);
+        // Find the TextView in the earthquake_list_iteme_list_item.xml layout with the ID location
+        TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
         // Get the version number from the current Earthquake object and
-        // set this text on the place TextView
-        placeTextView.setText(earthquake.getPlace());
+        // set this text on the location TextView
+        locationTextView.setText(earthquake.getLocation());
 
-        // Find the TextView in the list_item.xml layout with the ID date
+        // Find the TextView in the earthquake_list_item.xmlst_item.xml layout with the ID date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
         // Get the date from the current Earthquake object and
         // set the date to date TextView
