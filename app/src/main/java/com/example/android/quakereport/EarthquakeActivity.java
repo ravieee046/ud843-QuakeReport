@@ -33,13 +33,16 @@ public class EarthquakeActivity extends AppCompatActivity {
 
         // Create a fake list of earthquake locations.
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
-        earthquakes.add(new Earthquake("4.5","San Francisco","Feb 2, 2016"));
-        earthquakes.add(new Earthquake("3.7","London","Oct 16, 1994"));
-        earthquakes.add(new Earthquake("4.6","Tokyo","Feb 16, 1995"));
-        earthquakes.add(new Earthquake("3.8","Mexico City","Oct 17, 2017"));
-        earthquakes.add(new Earthquake("5.6","Moscow","Jan 26, 2017"));
-        earthquakes.add(new Earthquake("4.7","Rio de Janeiro","Sep 17, 2017"));
-        earthquakes.add(new Earthquake("6.8","Paris","Oct 17, 2017"));
+        earthquakes.add(new Earthquake("7.2","88km N of Yelizovo, Russia","1454124312220 ms"));
+        earthquakes.add(new Earthquake("6.1","94km SSE of Taron, Papua New Guinea","1453777820750 ms"));
+        earthquakes.add(new Earthquake("6.3","50km NNE of Al Hoceima, Morocco","1453695722730 ms"));
+        earthquakes.add(new Earthquake("7.1","86km E of Old Iliamna, Alaska","1453631430230 ms"));
+        earthquakes.add(new Earthquake("6.6","215km SW of Tomatlan, Mexico","1453399617650 ms"));
+        earthquakes.add(new Earthquake("6.7","52km SE of Shizunai, Japan","1452741933640 ms"));
+        earthquakes.add(new Earthquake("6.1","12km WNW of Charagua, Bolivia","1452741928270 ms"));
+        earthquakes.add(new Earthquake("6.2","74km NW of Rumoi, Japan","1452532083920 ms"));
+        earthquakes.add(new Earthquake("6.5","227km SE of Sarangani, Philippines","1452530285900 ms"));
+        earthquakes.add(new Earthquake("6","Pacific-Antarctic Ridge","1451986454620 ms"));
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);

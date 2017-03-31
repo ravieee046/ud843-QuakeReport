@@ -11,18 +11,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="4.5"
+        android:padding="5dp"
         android:layout_weight="1"/>
     <TextView
         android:id="@+id/location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         tools:text="Tokyo"
-        android:layout_weight="1"/>
+        android:layout_weight="2"/>
     <TextView
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="Feb 16, 1995"
-        android:layout_weight="1"/>
+        android:padding="5dp"
+        android:layout_weight="2"/>
 
 </LinearLayout>
