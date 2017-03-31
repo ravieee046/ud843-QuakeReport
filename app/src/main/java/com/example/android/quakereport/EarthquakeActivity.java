@@ -15,8 +15,12 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
+    private ListView earthquakeListView;
+    ArrayList<Earthquake> earthquakes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +38,10 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<Earthquake> earthquakes = new ArrayList<>();
-        earthquakes.add(new Earthquake("7.2","88km N of Yelizovo, Russia","1454124312220 ms"));
-        earthquakes.add(new Earthquake("6.1","94km SSE of Taron, Papua New Guinea","1453777820750 ms"));
-        earthquakes.add(new Earthquake("6.3","50km NNE of Al Hoceima, Morocco","1453695722730 ms"));
-        earthquakes.add(new Earthquake("7.1","86km E of Old Iliamna, Alaska","1453631430230 ms"));
-        earthquakes.add(new Earthquake("6.6","215km SW of Tomatlan, Mexico","1453399617650 ms"));
-        earthquakes.add(new Earthquake("6.7","52km SE of Shizunai, Japan","1452741933640 ms"));
-        earthquakes.add(new Earthquake("6.1","12km WNW of Charagua, Bolivia","1452741928270 ms"));
-        earthquakes.add(new Earthquake("6.2","74km NW of Rumoi, Japan","1452532083920 ms"));
-        earthquakes.add(new Earthquake("6.5","227km SE of Sarangani, Philippines","1452530285900 ms"));
-        earthquakes.add(new Earthquake("6","Pacific-Antarctic Ridge","1451986454620 ms"));
+        earthquakes = QueryUtils.extractEarthquakes();
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView = (ListView) findViewById(R.id.list);
 
         // Create a new {@link ArrayAdapter} of earthquakes
         EarthquakeAdapter adapter = new EarthquakeAdapter(
@@ -54,5 +50,16 @@ public class EarthquakeActivity extends AppCompatActivity {
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
+        setEarthquakeListClickListener();
+    }
+    private void setEarthquakeListClickListener(){
+        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Earthquake earthquake = earthquakes.get(position);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthquake.getUrl()));
+                startActivity(intent);
+            }
+        });
     }
 }
