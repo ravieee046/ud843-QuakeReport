@@ -8,7 +8,7 @@ public class Earthquake {
     private String mLocation;
     private String mDate;
     private String mTime;
-    private long mUnixTime;
+    private long   mUnixTime; //It is in milli second from 1st Jan 1970 mid night.
     private String mUrl;
 
     public Earthquake(Double mMagnitude, String mLocation, long mUnixTime, String mUrl) {
@@ -16,6 +16,8 @@ public class Earthquake {
         this.mLocation = mLocation;
         this.mUnixTime = mUnixTime;
         this.mUrl = mUrl;
+
+        //It sets Date and Time in proper format from Unix time.
         setDateAndTimeFormat();
     }
     private void setDateAndTimeFormat(){

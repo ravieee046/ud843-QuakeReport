@@ -31,6 +31,7 @@ public class EarthquakeActivity extends AppCompatActivity {
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
     private ListView earthquakeListView;
     ArrayList<Earthquake> earthquakes;
+    EarthquakeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +45,21 @@ public class EarthquakeActivity extends AppCompatActivity {
         earthquakeListView = (ListView) findViewById(R.id.list);
 
         // Create a new {@link ArrayAdapter} of earthquakes
-        EarthquakeAdapter adapter = new EarthquakeAdapter(
+        adapter = new EarthquakeAdapter(
                 this, earthquakes);
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
+
+        //Listen for list item click
         setEarthquakeListClickListener();
     }
     private void setEarthquakeListClickListener(){
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Earthquake earthquake = earthquakes.get(position);
+                Earthquake earthquake = adapter.getItem(position);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthquake.getUrl()));
                 startActivity(intent);
             }

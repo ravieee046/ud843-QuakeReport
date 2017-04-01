@@ -33,14 +33,13 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
                     R.layout.earthquake_list_item, parent, false);
         }
 
-        // Find the TextView in the earthquake_list_item.xmlst_item.xml layout with the ID magnitude
-        TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
-        // Get the magnitude from the current Earthquake object and
-        // set this text on the magnitude TextView
-
         // Get the {@link Earthquake} object located at this position in the list
         Earthquake earthquake = getItem(position);
 
+        // Find the TextView in the earthquake_list_item.xml layout with the ID magnitude
+        TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
+
+        // Get the magnitude and color from the current Earthquake object
         // Set the proper background color on the magnitude circle.
         // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
@@ -51,44 +50,51 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
 
-
+        // set this text on the magnitude TextView
         magnitudeTextView.setText(new DecimalFormat("0.0").format(earthquake.getMagnitude()));
 
+        //Get original Location which gives complete location.
         String originalLocation = earthquake.getLocation();
-        String offsetLocation;
-        String primaryLocation;
 
-        if(originalLocation.contains(STRING_SEPERATOR)){
-            String[] temp = originalLocation.split(" of ");
-            offsetLocation = temp[0]+STRING_SEPERATOR;
-            primaryLocation = temp[1];
-        }else{
-            offsetLocation = getContext().getString(R.string.near_the);
-            primaryLocation = originalLocation;
+        //Parse the original location in two parts as offset and primary location.
+        String[] parsedLocation = parseLocation(originalLocation);
+        String offsetLocation = parsedLocation[0];
+        String primaryLocation = parsedLocation[1];
 
-        }
-
-        // Find the TextView in the earthquake_list_iteme_list_item.xml layout with the ID location
-        TextView locationOffsetTextView = (TextView) listItemView.findViewById(R.id.location_offset);
+        // Find the TextView in the earthquake_list_iteme_list_item.xml layout with id of both the
+        // primary and offset location.
         // Get the version number from the current Earthquake object and
-        // set this text on the location TextView
+        // set this text on the locationOffset TextView and primaryLocation TextView.
+        TextView locationOffsetTextView = (TextView) listItemView.findViewById(R.id.location_offset);
         locationOffsetTextView.setText(offsetLocation);
-
         TextView primaryLocationTextView = (TextView)listItemView.findViewById(R.id.primary_location);
         primaryLocationTextView.setText(primaryLocation);
 
         // Find the TextView in the earthquake_list_item.xmlst_item.xml layout with the ID date
+        // and time
+        // Get the date and time from the current Earthquake object and
+        // set the date to date TextView and time to time TextView.
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
-        // Get the date from the current Earthquake object and
-        // set the date to date TextView
         dateTextView.setText(earthquake.getDate());
-
         TextView timeTextView = (TextView)listItemView.findViewById(R.id.time);
         timeTextView.setText(earthquake.getTime());
 
-        // Return the whole list item layout (containing 3 TextViews)
+        // Return the whole list item layout.
         // so that it can be shown in the ListView
         return listItemView;
+    }
+
+    private String[] parseLocation(String originalLocation){
+        String[] parsedLocation = new String[2];
+        if(originalLocation.contains(STRING_SEPERATOR)){
+            String[] splitString = originalLocation.split(" of ");
+            parsedLocation[0] = splitString[0]+STRING_SEPERATOR;
+            parsedLocation[1] = splitString[1];
+        }else{
+            parsedLocation[0] = getContext().getString(R.string.near_the);
+            parsedLocation[1] = originalLocation;
+        }
+        return parsedLocation;
     }
 
     private int getMagnitudeColor(double magnitude){
