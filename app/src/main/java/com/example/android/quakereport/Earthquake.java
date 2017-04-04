@@ -23,7 +23,7 @@ public class Earthquake {
     private void setDateAndTimeFormat(){
         Date date = new Date(this.mUnixTime);
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy");
         this.mDate = dateFormatter.format(date);
 
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
