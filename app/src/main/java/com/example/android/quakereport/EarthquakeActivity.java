@@ -83,6 +83,23 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        restartEarthquakeLoader();
+    }
+
+    private void restartEarthquakeLoader(){
+        if( (getActiveNetworkInfo() == null) || !getActiveNetworkInfo().isConnected() ) {
+            progressBar.setVisibility(View.GONE);
+            emptyView.setText(R.string.no_internet_connection);
+        } else {
+            emptyView.setText("");
+            progressBar.setVisibility(View.VISIBLE);
+            getLoaderManager().restartLoader(EARTHQUAKE_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main,menu);
         return true;
